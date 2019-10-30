@@ -1,0 +1,9 @@
+<ul class="list-group">
+    <li class="list-group-item"*ngFor="let user of users">{{user.first_name}} {{user.last_name}}</li>
+</ul>
+<br>
+<button class="btn btn-primary" (click)="createUser()">Create User</button><br><br>
+<button class="btn btn-primary" (click)="updateUser()">Update User</button><br><br>
+<button class="btn btn-primary" (click)="deleteUser(10)">Delete User</button><br><br>
+<button class="btn btn-primary" (click)="register()">Register</button><br>
+<label class="validation-error">{{registeredmssg}}</label>

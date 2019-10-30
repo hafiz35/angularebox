@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <form class="mt-3" [formGroup]="empForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" [formControl]="name" [(ngModel)]="employee.name">
+                    <span class="validation-error" *ngIf="name.invalid && name.untouched">Invalid name</span>
+                </div>
+                <div class="form-group">
+                    <label for="entersalary">Salary</label>
+                    <input type="text" id="entersalary" [formControl]="salary" [(ngModel)]="employee.salary">
+                    <div class="validation-error" *ngIf="salary.ng-invalid && salary.untouched">Salary required</div>
+                </div>
+                <div class="form-group">
+                    <h3>Department</h3>
+                    <select formControlName="department" [(ngModel)]="employee.department">
+                        <option *ngFor="let department of departments" [ngValue]="department"
+                            [selected]="department.id === employee.department.id">
+                            {{department.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="from-group">
+                    <div formArrayName="skill">
+                        <button class="btn btn-danger" (click)="onAddSkill()">Add Skill</button>
+                        <div class="form-group" *ngFor="let formControl of empForm.get('skill').controls;let i=index">
+                            <input type="text" class="form-control" [formControlName]="'i'" placeholder="Add Skill"
+                                [(ngModel)]="employee.skill">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" [disabled]="empForm.invalid">Save</button>
+            </form>
+        </div>
+        <div class="col-5">
+            <div class="block">
+                <strong>Employee Model</strong><br>
+                <pre>{{employee | json }}</pre>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="block">
+                <strong>Angular Generated Form Model</strong><br>
+                <pre>{{empForm.value | json}}</pre>
+            </div>
+        </div>
+    </div>
+</div>

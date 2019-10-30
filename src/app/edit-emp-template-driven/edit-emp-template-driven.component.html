@@ -1,0 +1,62 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3">
+            <b>Employee Edit</b>
+            <div>
+                <b>Employee</b>
+                <form>
+                    <div id="emp-data" ngModelGroup="empForm" #empForm="ngModelGroup">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" #name="ngModel" [(ngModel)]="employee.name"
+                                required minlength="2" maxlength="10">
+                            <span>{{employee.name}}</span>
+                            <!-- <div class="validation-error" *ngIf="name.errors?.minlength">Name must be atleast 2 characters
+                            long
+                        </div>
+                        <div>name.invalid - {{name.invalid}}</div>
+                        <div>name.touched - {{name.touched}}</div>
+                        <div>name.dirty - {{name.dirty}}</div>
+                        <div>name.errors.required - {{name.errors?.required}}</div>
+                        <div>name.errors.minlength - {{name.errors?.minlength | json}}</div> -->
+                        </div>
+                        <div class="form-group">
+                            <label for="salary">Salary</label>
+                            <input type="text" id="salary" ngModel name="salary" #salary="ngModel" [(ngModel)]="employee.salary"
+                                required>
+                            <div class="validation-error" *ngIf="salary.ng-invalid">Salary required</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="permanent form-check-label">Is permanent or not?</label>
+                            <div class="form-check-inline" value="Yes" *ngFor="let permanents of permanent">
+                                <input type="radio" class="form-check-input" [value]="permanents" name="ispermanent"
+                                    #ispermanent="ngModel" [(ngModel)]="employee.ispermanent" ngModel
+                                    #ispermanent="ngModel">{{permanents}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="department1">Department</label>
+                        <select name="department1" id="department1" class="form-control" >
+                            <option *ngFor="let department of departments" [value]="department" >{{department.name}}</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" [disabled]="!empForm.valid">Save</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="block">
+                <strong>Employee Model</strong><br>
+                <pre>{{employee | json }}</pre>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="block">
+                <strong>Angular Generated Form Model</strong><br>
+                <pre>{{empForm.value | json}}</pre>
+            </div>
+        </div>
+    </div>
+</div>
